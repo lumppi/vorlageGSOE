@@ -1,55 +1,87 @@
-![](./resources/official_armmbed_example_badge.png)
-# Blinky Mbed OS example
-
-The example project is part of the [Arm Mbed OS Official Examples](https://os.mbed.com/code/) and is the [getting started example for Mbed OS](https://os.mbed.com/docs/mbed-os/v5.14/quick-start/index.html). It contains an application that repeatedly blinks an LED on supported [Mbed boards](https://os.mbed.com/platforms/).
-
-You can build the project with all supported [Mbed OS build tools](https://os.mbed.com/docs/mbed-os/latest/tools/index.html). However, this example project specifically refers to the command-line interface tool [Arm Mbed CLI](https://github.com/ARMmbed/mbed-cli#installing-mbed-cli).
-(Note: To see a rendered example you can import into the Arm Online Compiler, please see our [import quick start](https://os.mbed.com/docs/mbed-os/latest/quick-start/online-with-the-online-compiler.html#importing-the-code).)
-
-1. [Install Mbed CLI](https://os.mbed.com/docs/mbed-os/latest/quick-start/offline-with-mbed-cli.html).
-
-1. Clone this repository on your system, and change the current directory to where the project was cloned:
-
-    ```bash
-    $ git clone git@github.com:armmbed/mbed-os-example-blinky && cd mbed-os-example-blinky
-    ```
-
-    Alternatively, you can download the example project with Arm Mbed CLI using the `import` subcommand:
-
-    ```bash
-    $ mbed import mbed-os-example-blinky && cd mbed-os-example-blinky
-    ```
+based on ![](./resources/official_armmbed_example_badge.png)
+<br>
+### **Vorlagenprojekt VorlageGSOE (basierend auf Blinky-Projekt)**
 
 
-## Application functionality
+Blinky ist Teil der [Arm Mbed OS Official Examples](https://os.mbed.com/code/) und ist das [Startbeispiel für ARM MBED OS6](https://os.mbed.com/docs/mbed-os/v6.16/introduction/index.html). Es enthält eine Anwendung die eine LED auf [Mbed boards](https://os.mbed.com/platforms/) blinken lässt. 
+Das offizielle Blinky-Projekt wurde hier überarbeitet, um einen Schnelleinstieg zum **STM32-Nucleo64-L152RE** mit BaseShield GSOE zu ermöglichen.
 
-The `main()` function is the single thread in the application. It toggles the state of a digital output connected to an LED on the board.
+**Vorlagenprojekt aus Github clonen ...**
+[Vorlagenprojekt GSOE](https://github.com/lumppi/vorlageGSOE.git) #LINK: https://github.com/lumppi/vorlageGSOE.git
 
-## Building and running
+***
+**A: ARM KEIL STUDIO: REGISTRIEREN  (siehe pdf-Anleitung Moodle/Tausch)**
 
-1. Connect a USB cable between the USB port on the board and the host computer.
-2. <a name="build_cmd"></a> Run the following command to build the example project and program the microcontroller flash memory:
-    ```bash
-    $ mbed compile -m <TARGET> -t <TOOLCHAIN> --flash
-    ```
-The binary is located at `./BUILD/<TARGET>/<TOOLCHAIN>/mbed-os-example-blinky.bin`.
+1.	Link in Browser (Firefox, Chrome) öffnen [ARM-KEIL-STUDIO-CLOUD](https://studio.keil.arm.com).
+2.	Sign up wählen, gültige email eingeben und Verification Code anfordern.
+3.	Verification Code aus email kopieren & eingeben.
+4.	Details eingeben (Name, … + Passwort) und Create betätigen.
 
-Alternatively, you can manually copy the binary to the board, which you mount on the host computer over USB.
+***
+**B: ARM KEIL STUDIO: MBED-BEISPIELPROJEKT HOLEN & TESTEN** 
 
-Depending on the target, you can build the example project with the `GCC_ARM`, `ARM` or `IAR` toolchain. After installing Arm Mbed CLI, run the command below to determine which toolchain supports your target:
+1.	Per File Menü Neues MBED Beispiel-Projekt „mbed-os-example-blinky“ erstellen.
+2.	Projekt markieren und mit Kontextmenü Set Active Project setzen. Danach kann das Projekt per Kontextmenü Rename z.B. in „Vorlage“ umbenannt werden. Um das Projekt zu komplettieren muss noch die Target Hardware „Nucleo-L152RE  ausgewählt werden. Spätestens jetzt sollte der STM32 angeschlossen werden. Dieser erscheint als logisches Laufwerk (z.B. F: oder G:) im Explorer. Außerdem sollte die Projektlibrary mbed-os auf die aktuellste Version (momentan 6.16) aktualisiert werden.
+3.	Anschließend lässt sich das Projekt mit dem Hammerbutton compilieren. Die fertige ausführbare Datei .bin Datei wird per Browser heruntergeladen und muss in das STM32 Laufwerk gespeichert werden. Dann blinkt die grüne user-LED. 
 
-```bash
-$ mbed compile -S
-```
+***
+**C: ARM KEIL STUDIO: GSOE VORLAGEN-PROJEKT HOLEN & VORBEREITEN** 
 
-## Expected output
-The LED on your target turns on and off every 500 milliseconds.
+1.	Per File Menü **Clone** Neues Vorlagen-Projekt aus Github Clonen.
+    [Vorlagenprojekt GSOE](https://github.com/lumppi/vorlageGSOE.git) LINK: https://github.com/lumppi/vorlageGSOE.git
+2.	Per Kontext Menü **Rename** Projekt umbenennen, z.B. in myPro oder test1. Im Projekt integriert sind bereits verschiedene Bibliotheken, u.a. zur Verwendung des LCD des Baseshields. Standardgemäß mit #if1 aktiviert ist das Programm VorlageBit.cpp. Dieses kann per Klick angezeigt werden.
+3.	Projekt per Hammerbutton **compilieren** und an STM32 herunterladen.
 
 
-## Troubleshooting
-If you have problems, you can review the [documentation](https://os.mbed.com/docs/latest/tutorials/debugging.html) for suggestions on what could be wrong and how to fix it.
+***
+**D: ARM KEIL STUDIO: GSOE VORLAGEN-PROJEKT BEARBEITEN**
 
-## Related Links
+ **Programm wechseln (im gleichen Projekt)**
+
+ 1. VorlageBit.cpp per **#if 0** deaktivieren.
+ 2. VorlageByte.cpp per **#if 1** aktivieren.
+ 3. Projekt per Hammerbutton **compilieren** und an STM32 herunterladen.<br> 
+
+**Neues Programm erstellen (im gleichen Projekt)**
+
+ 1. Letztes Programm per **#if 0** deaktivieren.
+ 2. Programm markieren und per Kontext Menü **Duplicate** Programm duplizieren.
+ 3. per Kontext Menü **Rename** z.B. in newprog.cpp umbenennen. 
+ 4. newprog.cpp per #if1 aktivieren und bearbeiten.
+ 5.	Projekt per Hammerbutton **compilieren** und an STM32 herunterladen.
+
+**Neues Projekt aus vorlageGSOE erstellen** 
+
+1. Per File Menü **Clone** Neues Vorlagen-Projekt aus Github Clonen. 
+2. Per Kontext Menü **Rename** Projekt umbenennen, z.B. in myProx oder testx. Standardgemäß mit **#if 1** aktiviert ist das Programm VorlageBit.cpp. 
+3. Programm markieren und per Kontext Menü **Duplicate** Programm duplizieren.
+4. per Kontext Menü **Rename** z.B. in newprog.cpp umbenennen. 
+5. newprog.cpp per **#if 1** aktivieren und bearbeiten.
+6. Projekt per Hammerbutton **compilieren** und an STM32 herunterladen.
+
+***
+
+**ACHTUNG:**
+
+- Es darf pro Projekt immer nur genau 1 Programm mit **#if 1** aktiviert sein.
+- Es ist ratsam die Programme im gleichen Projekt nach einem bestimmten Schema zu benennen, z.B. **kapX_Benennung.cpp**.
+- Projektcompilierung dauert deutlich **länger** als nur Programmcompilierung.
+
+**Ein neues Projekt lohnt nur …**
+
+- Wenn das vorige Projekt defekt ist.
+- Wenn das aktuelle Projekt geschützt werden soll, weil z.B. zusätzliche Bibliotheken benötigt werden, die das Projekt ändern.
+- ein Projekt/Bibliothek Update erfolgen soll.
+- das Projekt z.B. über github veröffentlicht werden soll. 
+
+
+***
+
+**Troubleshooting**
+ 
+ - [documentation](https://os.mbed.com/docs/latest/tutorials/debugging.html) 
+ ***
+**Related Links**
 
 * [Mbed OS Stats API](https://os.mbed.com/docs/latest/apis/mbed-statistics.html).
 * [Mbed OS Configuration](https://os.mbed.com/docs/latest/reference/configuration.html).
@@ -57,8 +89,7 @@ If you have problems, you can review the [documentation](https://os.mbed.com/doc
 * [Mbed OS bare metal](https://os.mbed.com/docs/mbed-os/latest/reference/mbed-os-bare-metal.html).
 * [Mbed boards](https://os.mbed.com/platforms/).
 
-### License and contributions
-
+***
+**License and contributions [DISCLAIMER]**
 The software is provided under Apache-2.0 license. Contributions to this project are accepted under the same license. Please see contributing.md for more info.
-
 This project contains code from other projects. The original license text is included in those source files. They must comply with our license guide.
